@@ -1,4 +1,7 @@
+import {WareHouseType} from './wareHouse.type';
+
 export type RootStackList = {
   Home: undefined;
-  Items: {warehouseId: number};
+  WareHouse: undefined;
+  Items: {warehouse: WareHouseType};
 };

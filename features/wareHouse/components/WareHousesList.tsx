@@ -9,8 +9,6 @@ import {styles} from '../styles';
 export const WareHousesList = () => {
   const dispatch = useAppDispatch();
   const {wareHouses} = useAppSelector(selectWareHouses);
-  console.log(wareHouses);
-  // const navigation = useNavigation<NativeStackNavigationProp<RootStackList>>();
   useEffect(() => {
     dispatch(getWareHouses());
   }, [dispatch]);
