@@ -1,1 +1,4 @@
-export type RootStackList = {Home: undefined; Items: undefined};
+export type RootStackList = {
+  Home: undefined;
+  Items: {warehouseId: number};
+};

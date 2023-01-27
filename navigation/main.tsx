@@ -11,7 +11,7 @@ export const Navigation = () => {
       allowFontScaling={false}
       style={{
         color: focused ? 'red' : '#000',
-        width: 50,
+        width: 'auto',
         fontSize: 11,
         textAlign: 'center',
       }}>
@@ -31,7 +31,7 @@ export const Navigation = () => {
           name={'HomeTab'}
           component={WareHouseNavigation}
           options={{
-            tabBarIcon: ({focused}) => getOptions(focused, 'Home'),
+            tabBarIcon: ({focused}) => getOptions(focused, 'WareHouse'),
           }}
         />
       </Tab.Navigator>

@@ -36,5 +36,5 @@ const wareHousesSlice = createSlice({
   },
 });
 export const selectWareHouses = (state: RootState): WareHouseState =>
-  state.wareHouses;
+  state.wareHousesState;
 export default wareHousesSlice.reducer;
