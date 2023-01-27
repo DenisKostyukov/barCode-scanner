@@ -15,7 +15,7 @@ export const WarehouseItem: FC<WarehouseItemProps> = ({warehouse}) => {
   return (
     <TouchableWithoutFeedback
       onPress={() =>
-        navigation.navigate(Screens.ITEMS, {warehouse: warehouse})
+        navigation.navigate(Screens.INVENTORY, {warehouse: warehouse})
       }>
       <View style={styles.warehouseBlock}>
         <View>

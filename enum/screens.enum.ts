@@ -1,4 +1,4 @@
 export enum Screens {
   'HOME' = 'Home',
-  'ITEMS' = 'Items',
+  'INVENTORY' = 'Inventory',
 }
