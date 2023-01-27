@@ -4,10 +4,13 @@ import {useEffect} from 'react';
 import {useAppDispatch} from '../hooks/redux';
 import {getWareHouses} from '../asyncThunks/wareHouse/getWareHouses';
 import {Screens} from '../enum/screens.enum';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackList} from '../types/stack.type';
 
-export const WarHouseScreen = ({navigation}: any) => {
+export const WarHouseScreen = () => {
   const dispatch = useAppDispatch();
-
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackList>>();
   useEffect(() => {
     dispatch(getWareHouses());
   }, [dispatch]);

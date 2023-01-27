@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {WareHouseNavigation} from './wareHouseNavigation';
 import {Text} from 'react-native';
 const Tab = createBottomTabNavigator();
+
 export const Navigation = () => {
   const getOptions = (focused: boolean, tabName: string) => (
     <Text
