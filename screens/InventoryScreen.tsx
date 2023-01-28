@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {InventoryContainer} from '../features/inventory/InventoryContainer';
 
 export const InventoryScreen = () => {
-  return <Text style={{color: '#000000'}}>I'm items Screen</Text>;
+  return <InventoryContainer />;
 };

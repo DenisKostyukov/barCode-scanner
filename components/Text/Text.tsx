@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {StyleSheet, Text as RNText} from 'react-native';
 type TextProps = {
-  text: string;
+  text: string | number;
   customStyles?: object;
 };
 export const Text: FC<TextProps> = ({text, customStyles}) => {

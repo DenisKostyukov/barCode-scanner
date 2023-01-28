@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  wareHouseList: {
+  inventoryListBlock: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  warehouseBlock: {
+  inventoryItemBlock: {
     backgroundColor: '#fff',
     width: '90%',
     marginBottom: 10,

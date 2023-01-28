@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackList} from '../../../types/stack.type';
 import {Screens} from '../../../enum/screens.enum';
+import {commonStyles} from '../../../styles/styles';
 type WarehouseItemProps = {
   warehouse: WareHouseType;
 };
@@ -19,12 +20,21 @@ export const WarehouseItem: FC<WarehouseItemProps> = ({warehouse}) => {
       }>
       <View style={styles.warehouseBlock}>
         <View>
-          <Text text={'name:'} customStyles={styles.propertyDesc} />
-          <Text text={warehouse.name} customStyles={styles.propertyValue} />
+          <Text text={'name:'} customStyles={commonStyles.propertyDesc} />
+          <Text
+            text={warehouse.name}
+            customStyles={commonStyles.propertyValue}
+          />
         </View>
         <View>
-          <Text text={'description:'} customStyles={styles.propertyDesc} />
-          <Text text={warehouse.desc} customStyles={styles.propertyValue} />
+          <Text
+            text={'description:'}
+            customStyles={commonStyles.propertyDesc}
+          />
+          <Text
+            text={warehouse.desc}
+            customStyles={commonStyles.propertyValue}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
