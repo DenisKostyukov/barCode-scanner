@@ -5,6 +5,7 @@ import {
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {getInventory} from '../../asyncThunks/inventory/getInventory';
 import {RootState} from '../store';
+import {addItem} from '../../asyncThunks/inventory/addItem';
 
 type InventoryState = {
   inventories: InventoryType[];
@@ -32,7 +33,21 @@ const inventorySlice = createSlice({
           state.loading = 'idle';
           state.inventories = action.payload.inventories;
         },
-      );
+      )
+      .addCase(getInventory.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.error;
+      })
+      .addCase(addItem.pending, state => {
+        state.loading = 'pending';
+      })
+      .addCase(addItem.fulfilled, state => {
+        state.loading = 'idle';
+      })
+      .addCase(addItem.rejected, (state, action) => {
+        state.loading = 'failed';
+        state.error = action.error;
+      });
   },
 });
 export const selectInventory = (state: RootState): InventoryState =>

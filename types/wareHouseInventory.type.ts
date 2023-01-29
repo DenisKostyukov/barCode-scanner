@@ -1,4 +1,4 @@
-type InventoryItem = {
+export type InventoryItem = {
   id: number;
   name: string;
   desc: string;
@@ -16,4 +16,16 @@ export type WareHouseInventoryType = {
   name: string;
   desc: string;
   inventories: InventoryType[];
+};
+export type AddItemType = {
+  name: string;
+  desc: string;
+  warCode: string;
+};
+export type AddInventoryType = {
+  name: string;
+  desc: string;
+  itemId: number;
+  quantity: number;
+  warehouseId: number;
 };

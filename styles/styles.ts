@@ -11,4 +11,8 @@ export const commonStyles = StyleSheet.create({
   propertyValue: {
     fontSize: 16,
   },
+  addButton: {
+    width: '60%',
+    marginHorizontal: '20%',
+  },
 });

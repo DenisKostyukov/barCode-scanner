@@ -1,9 +1,13 @@
 import {API} from '../enum/apiPath.enum';
+const defaultHeaders = {'Content-Type': 'application/json'};
 
 async function http<T>(path: string, config: RequestInit): Promise<T> {
-  const request = new Request(path, config);
+  const requestConfig = {
+    ...config,
+    headers: defaultHeaders,
+  };
+  const request = new Request(path, requestConfig);
   const response = await fetch(request);
-
   if (!response.ok) {
     throw new Error();
   }
