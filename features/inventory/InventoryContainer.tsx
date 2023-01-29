@@ -8,19 +8,22 @@ import {Button} from '@rneui/base';
 import {styles} from './styles';
 
 export const InventoryContainer = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
   return (
     <ScrollView style={commonStyles.container}>
       <Button
         title={'Add item'}
         containerStyle={[commonStyles.addButton, styles.addItemBtn]}
-        onPress={() => setIsVisible(true)}
+        onPress={toggleModal}
       />
       <Modal
-        isVisible={isVisible}
-        closeHandler={() => setIsVisible(false)}
+        isVisible={isModalVisible}
+        closeHandler={toggleModal}
         title={'Add item'}>
-        <InventoryModal handleCloseModal={() => setIsVisible(false)} />
+        <InventoryModal handleCloseModal={toggleModal} />
       </Modal>
       <InventoryList />
     </ScrollView>

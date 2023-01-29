@@ -4,14 +4,18 @@ import {getWareHouses} from '../../../asyncThunks/wareHouse/getWareHouses';
 import {selectWareHouses} from '../../../app/slices/wareHousesSlice';
 import {WareHouseType} from '../../../types/wareHouse.type';
 import {WarehouseItem} from './WarehouseItem';
-import {View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {styles} from '../styles';
 export const WareHousesList = () => {
   const dispatch = useAppDispatch();
-  const {wareHouses} = useAppSelector(selectWareHouses);
+  const {wareHouses, loading} = useAppSelector(selectWareHouses);
   useEffect(() => {
     dispatch(getWareHouses());
   }, [dispatch]);
+
+  if (loading === 'pending') {
+    return <ActivityIndicator size="large" />;
+  }
   return (
     <View style={styles.wareHouseList}>
       {wareHouses.map((wareHouse: WareHouseType) => {

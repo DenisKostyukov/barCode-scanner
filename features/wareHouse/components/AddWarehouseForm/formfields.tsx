@@ -13,16 +13,4 @@ export const fields: FormFieldType[] = [
     name: 'desc',
     type: 'input',
   },
-  {
-    placeholder: 'Code',
-    label: 'Code',
-    name: 'warCode',
-    type: 'input',
-  },
-  {
-    placeholder: 'Quantity',
-    label: 'Quantity',
-    name: 'quantity',
-    type: 'input',
-  },
 ];

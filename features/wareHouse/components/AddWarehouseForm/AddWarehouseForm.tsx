@@ -3,63 +3,41 @@ import {useAppDispatch} from '../../../../hooks/redux';
 import {useForm, Controller} from 'react-hook-form';
 import {View} from 'react-native';
 import {Input} from '../../../../components/Input/Input';
-import {addItemSchema} from '../../../../validationSchema/validationSchema';
+import {addWarehouseSchema} from '../../../../validationSchema/validationSchema';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {fields} from './formFields';
-import {
-  AddItemType,
-  InventoryItem,
-} from '../../../../types/wareHouseInventory.type';
-import {addItem} from '../../../../asyncThunks/inventory/addItem';
-import {addInventory} from '../../../../asyncThunks/inventory/addInventory';
-import {RouteProp, useRoute} from '@react-navigation/native';
-import {RootStackList} from '../../../../types/stack.type';
-import {Screens} from '../../../../enum/screens.enum';
-import {getInventory} from '../../../../asyncThunks/inventory/getInventory';
+
 import {Button} from '@rneui/base';
 import {FormFieldType} from '../../../../types/common';
+import {fields} from './formfields';
+import {addWarehouse} from '../../../../asyncThunks/wareHouse/addWarehouse';
+import {getWareHouses} from '../../../../asyncThunks/wareHouse/getWareHouses';
 
 const initialForm = {
   name: '',
   desc: '',
-  warCode: '',
-  quantity: '',
 };
-type AddItemFormProps = {
+type AddWarehouseFormProps = {
   handleCloseModal: () => void;
 };
-export const AddItemForm: FC<AddItemFormProps> = ({handleCloseModal}) => {
+export const AddWarehouseForm: FC<AddWarehouseFormProps> = ({
+  handleCloseModal,
+}) => {
   const dispatch = useAppDispatch();
-  const route = useRoute<RouteProp<RootStackList, Screens.INVENTORY>>();
-  const {warehouse} = route.params;
-  console.log('route ', warehouse);
+
   const {
     handleSubmit,
     control,
     reset,
     formState: {errors},
   } = useForm<any>({
-    resolver: yupResolver(addItemSchema),
+    resolver: yupResolver(addWarehouseSchema),
     defaultValues: initialForm,
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: AddItemType & {quantity: string}) => {
-    const addItemData = {
-      name: data.name,
-      desc: data.desc,
-      warCode: data.warCode,
-    };
-    const result = await dispatch(addItem(addItemData));
-    const addInventoryData = {
-      name: data.name,
-      desc: data.desc,
-      itemId: (result.payload as InventoryItem).id,
-      quantity: Number(data.quantity),
-      warehouseId: warehouse.id,
-    };
-    await dispatch(addInventory(addInventoryData));
-    await dispatch(getInventory(warehouse.id));
+  const onSubmit = async (data: any) => {
+    await dispatch(addWarehouse(data));
+    await dispatch(getWareHouses());
     reset();
     handleCloseModal();
   };

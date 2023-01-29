@@ -14,4 +14,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 15,
   },
+  addWarehouseBtn: {
+    marginBottom: 15,
+  },
 });

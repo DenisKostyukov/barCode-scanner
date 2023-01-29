@@ -14,3 +14,7 @@ export const addItemSchema = yup.object().shape({
   quantity: quantitySchema,
   warCode: warCodeSchema,
 });
+export const addWarehouseSchema = yup.object().shape({
+  name: nameSchema,
+  desc: descSchema,
+});
