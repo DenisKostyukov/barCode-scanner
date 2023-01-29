@@ -3,6 +3,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {WareHouseNavigation} from './wareHouseNavigation';
 import {Text} from 'react-native';
+import {MoveItemNavigation} from './moveItemNavigation';
 const Tab = createBottomTabNavigator();
 
 export const Navigation = () => {
@@ -31,7 +32,14 @@ export const Navigation = () => {
           name={'HomeTab'}
           component={WareHouseNavigation}
           options={{
-            tabBarIcon: ({focused}) => getOptions(focused, 'WareHouse'),
+            tabBarIcon: ({focused}) => getOptions(focused, 'Warehouse'),
+          }}
+        />
+        <Tab.Screen
+          name={'MoveItemTab'}
+          component={MoveItemNavigation}
+          options={{
+            tabBarIcon: ({focused}) => getOptions(focused, 'Move item'),
           }}
         />
       </Tab.Navigator>

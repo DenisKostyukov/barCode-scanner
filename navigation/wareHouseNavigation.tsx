@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator<RootStackList>();
 export const WareHouseNavigation = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={'WareHouse'} component={WarHouseScreen} />
+      <Stack.Screen name={'Warehouse'} component={WarHouseScreen} />
       <Stack.Screen
         name={'Inventory'}
         component={InventoryScreen}
