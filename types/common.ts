@@ -4,4 +4,5 @@ export type FormFieldType = {
   type: string;
   name: string;
   disabled?: boolean;
+  // options?: OptionType[];
 };

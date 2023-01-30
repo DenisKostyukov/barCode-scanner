@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Input as RNInput, InputProps} from '@rneui/base';
 import {FC} from 'react';
+import {styles} from './styles';
 
 // type InputPropsC = {
 //   onChange: () => void;
@@ -22,6 +23,12 @@ export const Input: FC<InputProps> = ({
     <RNInput
       errorMessage={errorMessage}
       label={label}
+      containerStyle={styles.containerStyle}
+      inputContainerStyle={styles.inputContainerStyle}
+      placeholderTextColor={'#000'}
+      inputStyle={styles.inputStyle}
+      labelStyle={styles.labelStyle}
+      errorStyle={styles.errorStyle}
       placeholder={placeholder}
       onChangeText={onChangeText}
       disabled={disabled}
