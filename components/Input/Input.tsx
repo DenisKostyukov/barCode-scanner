@@ -18,6 +18,7 @@ export const Input: FC<InputProps> = ({
   defaultValue,
   value,
   id,
+  keyboardType,
 }) => {
   return (
     <RNInput
@@ -30,6 +31,7 @@ export const Input: FC<InputProps> = ({
       labelStyle={styles.labelStyle}
       errorStyle={styles.errorStyle}
       placeholder={placeholder}
+      keyboardType={keyboardType}
       onChangeText={onChangeText}
       disabled={disabled}
       defaultValue={defaultValue}

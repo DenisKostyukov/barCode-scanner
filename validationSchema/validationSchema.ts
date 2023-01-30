@@ -6,6 +6,7 @@ const quantitySchema = yup
   .string()
   .required('Quantity is required')
   .matches(/^[0-9\.]+[0-9]{0,4}$/, 'Max decimal places 4');
+
 const warCodeSchema = yup.string().required('Code is required');
 const senderSchema = yup.number().min(1, 'Sender is required');
 const itemSchema = yup.number().min(1, 'Item is required');

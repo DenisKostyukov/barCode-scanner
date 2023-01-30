@@ -29,3 +29,9 @@ export type AddInventoryType = {
   quantity: number;
   warehouseId: number;
 };
+export type MoveItemType = {
+  senderId: number;
+  recipientId: number;
+  quantity: number;
+  itemId: number;
+};

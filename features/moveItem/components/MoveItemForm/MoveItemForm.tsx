@@ -5,14 +5,18 @@ import {moveItemSchema} from '../../../../validationSchema/validationSchema';
 import {View} from 'react-native';
 import {Input} from '../../../../components/Input/Input';
 import {Button} from '@rneui/base';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getWareHouses} from '../../../../asyncThunks/wareHouse/getWareHouses';
 import {selectWareHouses} from '../../../../app/slices/wareHousesSlice';
 import {WareHouseType} from '../../../../types/wareHouse.type';
 import {Select} from '../../../../components/Select/Select';
 import {selectInventory} from '../../../../app/slices/inventorySlice';
-import {InventoryType} from '../../../../types/wareHouseInventory.type';
+import {
+  InventoryType,
+  MoveItemType,
+} from '../../../../types/wareHouseInventory.type';
 import {getInventory} from '../../../../asyncThunks/inventory/getInventory';
+import {moveItem} from '../../../../asyncThunks/inventory/moveItem';
 
 const initialForm = {
   senderId: 0,
@@ -25,6 +29,7 @@ export const MoveItemForm = () => {
   const dispatch = useAppDispatch();
   const {wareHouses} = useAppSelector(selectWareHouses);
   const {inventories} = useAppSelector(selectInventory);
+  const [itemQuantity, setItemQuantity] = useState<number>(0);
   const {
     handleSubmit,
     control,
@@ -37,12 +42,22 @@ export const MoveItemForm = () => {
     mode: 'onChange',
   });
   const senderWarehouse = watch('senderId');
+  const itemId = watch('itemId');
+  const getItemQuantity = () => {
+    const foundInventory = inventories.find(
+      inventory => inventory.item.id === itemId,
+    );
+    setItemQuantity(foundInventory?.quantity || 0);
+  };
   useEffect(() => {
     dispatch(getWareHouses);
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     dispatch(getInventory(senderWarehouse));
-  }, [dispatch, senderWarehouse]);
+  }, [senderWarehouse]);
+  useEffect(() => {
+    getItemQuantity();
+  }, [itemId]);
   const fields = [
     {
       name: 'senderId',
@@ -59,13 +74,13 @@ export const MoveItemForm = () => {
       placeholder: 'Select item',
       enabled: !!senderWarehouse,
       options: inventories.map((option: InventoryType) => {
-        return {label: option.name, value: option.id};
+        return {label: option.name, value: option.item.id};
       }),
       type: 'select',
     },
     {
       name: 'quantity',
-      label: 'Quantity',
+      label: `Quantity max: ${itemQuantity}`,
       placeholder: 'Quantity',
       type: 'input',
     },
@@ -80,8 +95,10 @@ export const MoveItemForm = () => {
     },
   ];
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = (formData: MoveItemType) => {
+    const moveItemData = {...formData, quantity: Number(formData.quantity)};
+    dispatch(moveItem(moveItemData));
+    reset();
   };
 
   return (
@@ -97,10 +114,17 @@ export const MoveItemForm = () => {
                 <Input
                   id={field.name}
                   value={value}
+                  keyboardType={'numeric'}
                   label={field.label}
-                  onChangeText={onChange}
+                  onChangeText={value => {
+                    onChange(value);
+                  }}
                   placeholder={field.placeholder}
-                  errorMessage={errors[field.name]?.message as string}
+                  errorMessage={
+                    value > itemQuantity
+                      ? 'Quantity error'
+                      : (errors[field.name]?.message as string)
+                  }
                 />
               )}
             />
@@ -127,13 +151,14 @@ export const MoveItemForm = () => {
           );
         }
       })}
-
-      <Button title={'Submit'} onPress={handleSubmit(onSubmit)} />
-      <Button
-        title={'Cancel'}
-        // onPress={handleCloseModal}
-        containerStyle={{marginTop: 10}}
-      />
+      <View style={{marginTop: 10, width: '90%', marginHorizontal: '5%'}}>
+        <Button title={'Submit'} onPress={handleSubmit(onSubmit)} />
+        <Button
+          title={'Cancel'}
+          onPress={() => reset()}
+          containerStyle={{marginTop: 10}}
+        />
+      </View>
     </View>
   );
 };

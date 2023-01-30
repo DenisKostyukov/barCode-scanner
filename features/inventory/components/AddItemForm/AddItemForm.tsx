@@ -32,7 +32,6 @@ export const AddItemForm: FC<AddItemFormProps> = ({handleCloseModal}) => {
   const dispatch = useAppDispatch();
   const route = useRoute<RouteProp<RootStackList, Screens.INVENTORY>>();
   const {warehouse} = route.params;
-  console.log('route ', warehouse);
   const {
     handleSubmit,
     control,

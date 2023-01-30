@@ -4,4 +4,5 @@ export const API = {
   inventory: '/warehouse/items',
   addInventory: '/inventory',
   item: '/item',
+  moveItem: '/warehouse/moveItem',
 };
