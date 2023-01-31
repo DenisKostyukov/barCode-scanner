@@ -21,7 +21,7 @@ export async function get<T>(path: string, config?: RequestInit): Promise<T> {
 
 export async function post<T, U>(
   path: string,
-  body: T,
+  body?: T,
   config?: RequestInit,
 ): Promise<U> {
   const init = {method: 'post', body: JSON.stringify(body), ...config};

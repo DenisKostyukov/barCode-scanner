@@ -17,4 +17,14 @@ export const styles = StyleSheet.create({
   addItemBtn: {
     marginBottom: 15,
   },
+  takeOutBtn: {
+    marginTop: 15,
+    width: '50%',
+    marginHorizontal: '25%',
+  },
+  quantityText: {
+    color: 'red',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });

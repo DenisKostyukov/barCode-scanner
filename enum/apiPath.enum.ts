@@ -5,4 +5,5 @@ export const API = {
   addInventory: '/inventory',
   item: '/item',
   moveItem: '/warehouse/moveItem',
+  takeOut: '/inventory/takeOut',
 };

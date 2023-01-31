@@ -23,8 +23,8 @@ export const InventoryList = () => {
   }
   return (
     <View style={styles.inventoryListBlock}>
-      {inventories.map((item: InventoryType) => {
-        return <InventoryItem key={item.id} item={item} />;
+      {inventories.map((inventory: InventoryType) => {
+        return <InventoryItem key={inventory.id} inventory={inventory} />;
       })}
     </View>
   );
