@@ -18,6 +18,7 @@ import {
 import {getInventory} from '../../../../asyncThunks/inventory/getInventory';
 import {moveItem} from '../../../../asyncThunks/inventory/moveItem';
 import {FormFieldType} from '../../../../types/common';
+import * as yup from 'yup';
 
 const initialForm = {
   senderId: 0,
@@ -31,6 +32,14 @@ export const MoveItemForm = () => {
   const {wareHouses} = useAppSelector(selectWareHouses);
   const {inventories} = useAppSelector(selectInventory);
   const [itemQuantity, setItemQuantity] = useState<number>(0);
+  const quantitySchema = yup.object().shape({
+    quantity: yup
+      .number()
+      .transform(value => (isNaN(value) ? undefined : value))
+      .required('Quantity is required')
+      .max(itemQuantity, `Max quantity: ${itemQuantity}`),
+  });
+  const schema = moveItemSchema.concat(quantitySchema);
   const {
     handleSubmit,
     control,
@@ -38,10 +47,11 @@ export const MoveItemForm = () => {
     watch,
     formState: {errors},
   } = useForm<any>({
-    resolver: yupResolver(moveItemSchema),
+    resolver: yupResolver(schema),
     defaultValues: initialForm,
     mode: 'onChange',
   });
+
   const senderWarehouse = watch('senderId');
   const itemId = watch('itemId');
   const getItemQuantity = () => {
@@ -120,11 +130,7 @@ export const MoveItemForm = () => {
                   label={field.label}
                   onChangeText={onChange}
                   placeholder={field.placeholder}
-                  errorMessage={
-                    value > itemQuantity
-                      ? 'Quantity error'
-                      : (errors[field.name]?.message as string)
-                  }
+                  errorMessage={errors[field.name]?.message as string}
                 />
               )}
             />

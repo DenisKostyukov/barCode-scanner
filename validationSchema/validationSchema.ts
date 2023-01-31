@@ -26,6 +26,5 @@ export const addWarehouseSchema = yup.object().shape({
 export const moveItemSchema = yup.object().shape({
   senderId: senderSchema,
   itemId: itemSchema,
-  quantity: quantitySchema,
   recipientId: recipientSchema,
 });
