@@ -17,6 +17,7 @@ import {
 } from '../../../../types/wareHouseInventory.type';
 import {getInventory} from '../../../../asyncThunks/inventory/getInventory';
 import {moveItem} from '../../../../asyncThunks/inventory/moveItem';
+import {FormFieldType} from '../../../../types/common';
 
 const initialForm = {
   senderId: 0,
@@ -58,7 +59,7 @@ export const MoveItemForm = () => {
   useEffect(() => {
     getItemQuantity();
   }, [itemId]);
-  const fields = [
+  const fields: FormFieldType[] = [
     {
       name: 'senderId',
       label: 'Sender warehouse',
@@ -82,6 +83,7 @@ export const MoveItemForm = () => {
       name: 'quantity',
       label: `Quantity max: ${itemQuantity}`,
       placeholder: 'Quantity',
+      keyboardType: 'numeric',
       type: 'input',
     },
     {
@@ -114,11 +116,9 @@ export const MoveItemForm = () => {
                 <Input
                   id={field.name}
                   value={value}
-                  keyboardType={'numeric'}
+                  keyboardType={field?.keyboardType}
                   label={field.label}
-                  onChangeText={value => {
-                    onChange(value);
-                  }}
+                  onChangeText={onChange}
                   placeholder={field.placeholder}
                   errorMessage={
                     value > itemQuantity

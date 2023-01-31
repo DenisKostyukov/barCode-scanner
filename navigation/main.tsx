@@ -12,8 +12,9 @@ export const Navigation = () => {
       allowFontScaling={false}
       style={{
         color: focused ? 'red' : '#000',
-        width: 'auto',
-        fontSize: 11,
+
+        fontSize: 14,
+        alignItems: 'center',
         textAlign: 'center',
       }}>
       {tabName}

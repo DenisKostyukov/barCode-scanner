@@ -3,10 +3,8 @@ import {View} from 'react-native';
 import {Text} from '../Text/Text';
 import {Picker} from '@react-native-picker/picker';
 import {styles} from './style';
-type OptionType = {
-  label: string;
-  value: number | string;
-};
+import {OptionType} from '../../types/common';
+
 type SelectProps = {
   placeholder?: string;
   label?: string;

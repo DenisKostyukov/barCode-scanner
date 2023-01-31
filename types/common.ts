@@ -1,8 +1,14 @@
+import {KeyboardType} from 'react-native';
+export type OptionType = {
+  label: string;
+  value: number | string;
+};
 export type FormFieldType = {
   placeholder?: string;
   label?: string;
   type: string;
   name: string;
-  disabled?: boolean;
-  // options?: OptionType[];
+  enabled?: boolean;
+  options?: OptionType[];
+  keyboardType?: KeyboardType;
 };
